@@ -8,4 +8,9 @@ RSpec.describe Quote, type: :model do
     FactoryGirl.create_list(:quote,20)
     expect(Quote.all.count).to eq(20)
   end
+  let(:quote) { FactoryGirl.create(:quote)}
+  it "searchs for an author", :type => :request do
+    get '/quotes?name='+quote.author
+    expect(JSON.parse(response.body).first['author']).to eq(quote.author)
+  end
 end
