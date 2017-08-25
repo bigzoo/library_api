@@ -1,11 +1,11 @@
 class QuotesController < ApplicationController
   def index
-    if params[:name]
-      author = params[:name]
-      @quotes = Quote.search(author)
-    else
+     if params[:name]
+       author = params[:name]
+       @quotes = Quote.search(author)
+     else
       @quotes = Quote.all
-    end
+     end
     json_response(@quotes)
   end
 
@@ -22,6 +22,7 @@ class QuotesController < ApplicationController
   def update
     @quote = Quote.find(params[:id])
     @quote.update!(quote_params)
+    json_response(@quote)
   end
 
   def destroy
